@@ -1,12 +1,17 @@
 <?php
-include "db_conn.php";
-$id = $_GET['id'];
-$sqli = "DELETE FROM   `CRUD` WHERE ID=$id";
-$res = mysqli_query($conn,$sqli);
-if($res){
-    header("Location: index.php?msg=Record deleted successfully ");
+$conn = mysqli_connect("localhost","root","","one");
+if(!$conn){
+    die("Eroor could not connect".mysqli_error());
+}
+
+$stmt = "DROP DATABASE one";
+
+$res = mysqli_query($conn,$stmt);
+
+if($res===true){
+    echo "Program successfull";
 }
 else{
-    echo "Failed: ".mysqli_error($conn);
+    echo "unsucessful";
 }
-?>
+mysqli_close($conn);
